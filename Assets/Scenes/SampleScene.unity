@@ -148,7 +148,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.08627451, g: 0.5294118, b: 0.4117647, a: 0}
+  m_BackGroundColor: {r: 0.13238698, g: 0.23584908, b: 0.20838127, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -241,3 +241,11 @@ MonoBehaviour:
   height: 8
   tilePrefab: {fileID: 9070991908447218647, guid: 6ffe5f83ff15c4129af5d0c2882b0e25,
     type: 3}
+  dots:
+  - {fileID: 3122517894798937674, guid: 3e8a4e0f5f6424bdaba96030e9bfb029, type: 3}
+  - {fileID: 6713155435164528660, guid: 03d89030c1ec149fb821d03c5f778c61, type: 3}
+  - {fileID: 8668894113711066997, guid: 338a1b75affbe4719931d31fd6345377, type: 3}
+  - {fileID: 4447940018869630101, guid: 2be8c71778b8e4bfdaf2752b73a38871, type: 3}
+  - {fileID: 805437931592379408, guid: f37052b7791184e60a982cbf83a63574, type: 3}
+  - {fileID: 1558480407815028622, guid: 48588d0c4c1b145fbbcae155bcf682e2, type: 3}
+  - {fileID: 6690559344161431784, guid: 853462d0cd2d640ea872d53122ecbc00, type: 3}
