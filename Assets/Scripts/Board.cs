@@ -16,6 +16,7 @@ public class Board : MonoBehaviour
     public int offset;
     public GameObject tilePrefab;
     public GameObject[] dots;
+    public GameObject destroyEffect;
     private BackgroundTile[,] allTiles;
     public GameObject[,] allDots;
     private FindMatches findMatches;
@@ -109,6 +110,8 @@ public class Board : MonoBehaviour
         if (allDots[column, row].GetComponent<Dot>().isMatched)
         {
             findMatches.currentMatches.Remove(allDots[column, row]);
+            GameObject particle = Instantiate(destroyEffect, allDots[column,row].transform.position, Quaternion.identity);
+            Destroy(particle, .5f);
             Destroy(allDots[column, row]);
             allDots[column, row] = null;
         }
@@ -162,9 +165,11 @@ public class Board : MonoBehaviour
                     int dotToUse = Random.Range(0, dots.Length);
                     GameObject piece = Instantiate(dots[dotToUse],
                       tempPosition, Quaternion.identity);
-                    allDots[i,j] = piece;
                     piece.GetComponent<Dot>().row = j;
                     piece.GetComponent<Dot>().column = i;
+                    piece.transform.parent = this.transform;
+                    piece.name = "( " + i + ", " + j + " )";
+                    allDots[i,j] = piece;
                 }
             }
         }

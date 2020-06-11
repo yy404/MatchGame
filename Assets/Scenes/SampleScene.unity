@@ -207,7 +207,7 @@ GameObject:
   m_Layer: 0
   m_Name: Match FInder
   m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -251,7 +251,7 @@ GameObject:
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -295,3 +295,5 @@ MonoBehaviour:
   - {fileID: 805437931592379408, guid: f37052b7791184e60a982cbf83a63574, type: 3}
   - {fileID: 1558480407815028622, guid: 48588d0c4c1b145fbbcae155bcf682e2, type: 3}
   - {fileID: 6690559344161431784, guid: 853462d0cd2d640ea872d53122ecbc00, type: 3}
+  destroyEffect: {fileID: 23151640794245560, guid: 477f0596832d74df2ae9cb6197e1d99d,
+    type: 3}
