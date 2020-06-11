@@ -25,12 +25,12 @@ public class Dot : MonoBehaviour
     void Start()
     {
         board = FindObjectOfType<Board>();
-        targetX = (int)transform.position.x;
-        targetY = (int)transform.position.y;
-        row = targetY;
-        column = targetX;
-        prevRow = row;
-        prevColumn = column;
+        // targetX = (int)transform.position.x;
+        // targetY = (int)transform.position.y;
+        // row = targetY;
+        // column = targetX;
+        // prevRow = row;
+        // prevColumn = column;
     }
 
     // Update is called once per frame
@@ -131,6 +131,8 @@ public class Dot : MonoBehaviour
         {
             //Right Swipe
             otherDot = board.allDots[column+1, row];
+            prevRow = row;
+            prevColumn = column;
             otherDot.GetComponent<Dot>().column -= 1;
             column += 1;
         }
@@ -138,6 +140,8 @@ public class Dot : MonoBehaviour
         {
             //Up Swipe
             otherDot = board.allDots[column, row+1];
+            prevRow = row;
+            prevColumn = column;
             otherDot.GetComponent<Dot>().row -= 1;
             row += 1;
         }
@@ -145,6 +149,8 @@ public class Dot : MonoBehaviour
         {
             //Left Swipe
             otherDot = board.allDots[column-1, row];
+            prevRow = row;
+            prevColumn = column;
             otherDot.GetComponent<Dot>().column += 1;
             column -= 1;
         }
@@ -152,6 +158,8 @@ public class Dot : MonoBehaviour
         {
             //Down Swipe
             otherDot = board.allDots[column, row-1];
+            prevRow = row;
+            prevColumn = column;
             otherDot.GetComponent<Dot>().row += 1;
             row -= 1;
         }
