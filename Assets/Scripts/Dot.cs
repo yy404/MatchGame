@@ -49,28 +49,34 @@ public class Dot : MonoBehaviour
         {
             // Move towards the target
             tempPosition = new Vector2(targetX, transform.position.y);
-            transform.position = Vector2.Lerp(transform.position, tempPosition, .4f);
+            transform.position = Vector2.Lerp(transform.position, tempPosition, .6f);
+            if (board.allDots[column, row] != this.gameObject)
+            {
+                board.allDots[column, row] = this.gameObject;
+            }
         }
         else
         {
             // Directly set the position
             tempPosition = new Vector2(targetX, transform.position.y);
             transform.position = tempPosition;
-            board.allDots[column,row] = this.gameObject;
         }
 
         if (Mathf.Abs(targetY - transform.position.y) > .1)
         {
             // Move towards the target
             tempPosition = new Vector2(transform.position.x, targetY);
-            transform.position = Vector2.Lerp(transform.position, tempPosition, .4f);
+            transform.position = Vector2.Lerp(transform.position, tempPosition, .6f);
+            if (board.allDots[column, row] != this.gameObject)
+            {
+                board.allDots[column, row] = this.gameObject;
+            }
         }
         else
         {
             // Directly set the position
             tempPosition = new Vector2(transform.position.x, targetY);
             transform.position = tempPosition;
-            board.allDots[column,row] = this.gameObject;
         }
     }
 
@@ -103,7 +109,7 @@ public class Dot : MonoBehaviour
     private void OnMouseUp()
     {
         finalTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        CalculateAngle();
+        CalculateAngle(); // and may move pieces
     }
 
     void CalculateAngle()
@@ -149,7 +155,7 @@ public class Dot : MonoBehaviour
             otherDot.GetComponent<Dot>().row += 1;
             row -= 1;
         }
-        StartCoroutine("CheckMoveCo");
+        StartCoroutine(CheckMoveCo());
     }
 
     void FindMatches()
