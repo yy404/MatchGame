@@ -169,15 +169,24 @@ public class FindMatches : MonoBehaviour
                 // Make it unmatched
                 board.currentDot.isMatched = false;
                 // Decide what kind of bomb to make
-                int typeOfBomb = Random.Range(0,100);
-                if (typeOfBomb < 50)
+                // int typeOfBomb = Random.Range(0,100);
+                // if (typeOfBomb < 50)
+                // {
+                //     // Make a row bomb
+                //     board.currentDot.MakeRowBomb();
+                // }
+                // else if (typeOfBomb >= 50)
+                // {
+                //     // Make a column bomb
+                //     board.currentDot.MakeColumnBomb();
+                // }
+                if ( (board.currentDot.swipeAngle > -45 && board.currentDot.swipeAngle <= 45)
+                  || (board.currentDot.swipeAngle < -135 || board.currentDot.swipeAngle >= 135))
                 {
-                    // Make a row bomb
                     board.currentDot.MakeRowBomb();
                 }
-                else if (typeOfBomb >= 50)
+                else
                 {
-                    // Make a column bomb
                     board.currentDot.MakeColumnBomb();
                 }
             }
@@ -191,17 +200,27 @@ public class FindMatches : MonoBehaviour
                     // Make it unmatched
                     otherDot.isMatched = false;
                     // Decide what kind of bomb to make
-                    int typeOfBomb = Random.Range(0,100);
-                    if (typeOfBomb < 50)
+                    // int typeOfBomb = Random.Range(0,100);
+                    // if (typeOfBomb < 50)
+                    // {
+                    //     // Make a row bomb
+                    //     otherDot.MakeRowBomb();
+                    // }
+                    // else if (typeOfBomb >= 50)
+                    // {
+                    //     // Make a column bomb
+                    //     otherDot.MakeColumnBomb();
+                    // }
+                    if ( (board.currentDot.swipeAngle > -45 && board.currentDot.swipeAngle <= 45)
+                      || (board.currentDot.swipeAngle < -135 || board.currentDot.swipeAngle >= 135))
                     {
-                        // Make a row bomb
                         otherDot.MakeRowBomb();
                     }
-                    else if (typeOfBomb >= 50)
+                    else
                     {
-                        // Make a column bomb
                         otherDot.MakeColumnBomb();
                     }
+
                 }
             }
         }
