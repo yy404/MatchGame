@@ -195,11 +195,18 @@ public class Dot : MonoBehaviour
         otherDot = board.allDots[column+x, row+y];
         prevRow = row;
         prevColumn = column;
-        otherDot.GetComponent<Dot>().column += -1 * x;
-        otherDot.GetComponent<Dot>().row += -1 * y;
-        column += x;
-        row += y;
-        StartCoroutine(CheckMoveCo());
+        if (otherDot != null)
+        {
+            otherDot.GetComponent<Dot>().column += -1 * x;
+            otherDot.GetComponent<Dot>().row += -1 * y;
+            column += x;
+            row += y;
+            StartCoroutine(CheckMoveCo());
+        }
+        else
+        {
+            board.currentState = GameState.move;
+        }
     }
 
     void MovePieces()
