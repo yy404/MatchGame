@@ -30,10 +30,12 @@ public class Board : MonoBehaviour
     public int height;
     public int offset;
     public GameObject tilePrefab;
+    public GameObject breakableTilePrefab;
     public GameObject[] dots;
     public GameObject destroyEffect;
     public TileType[] boardLayout;
     private bool[,] blankSpaces;
+    private BackgroundTile[,] breakableTiles;
     public GameObject[,] allDots;
     public Dot currentDot;
     private FindMatches findMatches;
@@ -42,6 +44,7 @@ public class Board : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        breakableTiles = new BackgroundTile[width, height];
         findMatches = FindObjectOfType<FindMatches>();
         blankSpaces = new bool[width, height];
         allDots = new GameObject[width, height];
@@ -59,9 +62,26 @@ public class Board : MonoBehaviour
         }
     }
 
+    public void GenerateBreakableTiles()
+    {
+        // Look at all the tiles in the layout
+        for (int i = 0; i < boardLayout.Length; i++)
+        {
+            // If a tile is a "Jelly" tile
+            if (boardLayout[i].tileKind == TileKind.Breakable)
+            {
+                // Create a "Jelly" tile at that position
+                Vector2 tempPosition = new Vector2(boardLayout[i].x, boardLayout[i].y);
+                GameObject tile = Instantiate(breakableTilePrefab, tempPosition, Quaternion.identity);
+                breakableTiles[boardLayout[i].x, boardLayout[i].y] = tile.GetComponent<BackgroundTile>();
+            }
+        }
+    }
+
     private void SetUp()
     {
         GenerateBlankSpaces();
+        GenerateBreakableTiles();
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
@@ -69,6 +89,8 @@ public class Board : MonoBehaviour
                 if (!blankSpaces[i,j])
                 {
                     Vector2 tempPosition = new Vector2(i,j+offset);
+
+                    // To do: moving down the backgroundTile
                     GameObject backgroundTile = Instantiate(tilePrefab,
                     tempPosition, Quaternion.identity) as GameObject;
                     backgroundTile.transform.parent = this.transform;
@@ -245,8 +267,21 @@ public class Board : MonoBehaviour
             {
                 CheckToMakeBombs();
             }
+
+            // Does a tile need to break?
+            if (breakableTiles[column, row] != null)
+            {
+                // If it does, give one damage.
+                breakableTiles[column, row].TakeDamage(1);
+                if (breakableTiles[column, row].hitPoints <= 0)
+                {
+                    breakableTiles[column,row] = null;
+                }
+            }
+
             GameObject particle = Instantiate(destroyEffect,
               allDots[column,row].transform.position, Quaternion.identity);
+
             Destroy(particle, .5f);
             Destroy(allDots[column, row]);
             allDots[column, row] = null;
