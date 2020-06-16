@@ -298,8 +298,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 1
-  width: 8
-  height: 8
+  width: 5
+  height: 5
   offset: 20
   tilePrefab: {fileID: 9070991908447218647, guid: 6ffe5f83ff15c4129af5d0c2882b0e25,
     type: 3}
@@ -319,28 +319,7 @@ MonoBehaviour:
   - x: 0
     y: 0
     tileKind: 1
-  - x: 7
-    y: 7
-    tileKind: 1
-  - x: 7
-    y: 0
-    tileKind: 1
-  - x: 0
-    y: 7
-    tileKind: 1
   - x: 4
     y: 4
     tileKind: 1
-  - x: 5
-    y: 4
-    tileKind: 1
-  - x: 1
-    y: 5
-    tileKind: 0
-  - x: 1
-    y: 6
-    tileKind: 0
-  - x: 1
-    y: 7
-    tileKind: 0
   currentDot: {fileID: 0}
