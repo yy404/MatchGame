@@ -101,6 +101,7 @@ public class Board : MonoBehaviour
                     while(MatchesAt(i,j,dots[dotToUse]) && maxIterations < 100)
                     {
                         dotToUse = Random.Range(0, dots.Length);
+                        maxIterations++;
                         Debug.Log(maxIterations);
                     }
 
@@ -411,6 +412,7 @@ public class Board : MonoBehaviour
 
         if (IsDeadlocked())
         {
+            ShuffleBoard();
             Debug.Log("Deadlocked!!!");
         }
         currentState = GameState.move;
@@ -430,7 +432,7 @@ public class Board : MonoBehaviour
     {
         for (int i = 0; i < width; i++)
         {
-            for (int j = 0; j < width; j++)
+            for (int j = 0; j < height; j++)
             {
                 if (allDots[i,j] != null)
                 {
@@ -502,5 +504,57 @@ public class Board : MonoBehaviour
             }
         }
         return true;
+    }
+
+    private void ShuffleBoard()
+    {
+        // Create a list of game objects
+        List<GameObject> newBoard = new List<GameObject>();
+        // Add every piece to this list
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                if (allDots[i,j] != null)
+                {
+                    newBoard.Add(allDots[i,j]);
+                }
+            }
+        }
+        // For every spot on the board
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                // If this spot shouldn't be blank
+                if (!blankSpaces[i,j])
+                {
+                    // pick a random number
+                    int pieceToUse = Random.Range(0,newBoard.Count);
+
+                    int maxIterations = 0;
+                    while(MatchesAt(i,j,newBoard[pieceToUse]) && maxIterations < 100)
+                    {
+                        pieceToUse = Random.Range(0, newBoard.Count);
+                        maxIterations++;
+                        // Debug.Log(maxIterations);
+                    }
+                    // Make a container for the piece
+                    Dot piece = newBoard[pieceToUse].GetComponent<Dot>();
+                    // Assign the column/row to the piece
+                    piece.column = i;
+                    piece.row = j;
+                    // Fill in the dots array with this new piece
+                    allDots[i,j] = newBoard[pieceToUse];
+                    // Remove it from the list
+                    newBoard.Remove(newBoard[pieceToUse]);
+                }
+            }
+        }
+        // Check if it's still deadlocked
+        if (IsDeadlocked())
+        {
+            ShuffleBoard();
+        }
     }
 }
