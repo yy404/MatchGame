@@ -39,11 +39,15 @@ public class Board : MonoBehaviour
     public GameObject[,] allDots;
     public Dot currentDot;
     private FindMatches findMatches;
+    public int baseDamageValue = 1;
+    private int streakValue = 1;
+    private DamageManager damageManager;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        damageManager = FindObjectOfType<DamageManager>();
         breakableTiles = new BackgroundTile[width, height];
         findMatches = FindObjectOfType<FindMatches>();
         blankSpaces = new bool[width, height];
@@ -89,10 +93,11 @@ public class Board : MonoBehaviour
                 if (!blankSpaces[i,j])
                 {
                     Vector2 tempPosition = new Vector2(i,j+offset);
+                    Vector2 tilePosition = new Vector2(i,j);
 
                     // To do: moving down the backgroundTile
                     GameObject backgroundTile = Instantiate(tilePrefab,
-                    tempPosition, Quaternion.identity) as GameObject;
+                    tilePosition, Quaternion.identity) as GameObject;
                     backgroundTile.transform.parent = this.transform;
                     backgroundTile.name = "( " + i + ", " + j + " )";
                     int dotToUse = Random.Range(0, dots.Length);
@@ -283,6 +288,11 @@ public class Board : MonoBehaviour
             GameObject particle = Instantiate(destroyEffect,
               allDots[column,row].transform.position, Quaternion.identity);
 
+            if (allDots[column, row].tag == "Tile_Attack")
+            {
+                damageManager.DealDamage(baseDamageValue * streakValue);
+            }
+
             Destroy(particle, .5f);
             Destroy(allDots[column, row]);
             allDots[column, row] = null;
@@ -403,6 +413,7 @@ public class Board : MonoBehaviour
 
         while(MatchesOnBoard())
         {
+            // streakValue += 1; // not using streak for now
             yield return new WaitForSeconds(.5f);
             DestroyMatches();
         }
@@ -416,6 +427,7 @@ public class Board : MonoBehaviour
             Debug.Log("Deadlocked!!!");
         }
         currentState = GameState.move;
+        streakValue = 1;
     }
 
     private void SwitchPieces(int column, int row, Vector2 direction)
