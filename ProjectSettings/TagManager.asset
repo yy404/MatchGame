@@ -11,6 +11,10 @@ TagManager:
   - n5
   - n6
   - n7
+  - Tile_Heart
+  - Tile_Attack
+  - Tile_Operator
+  - Tile_Loot
   layers:
   - Default
   - TransparentFX
