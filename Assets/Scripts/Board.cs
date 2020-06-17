@@ -43,6 +43,8 @@ public class Board : MonoBehaviour
     private int streakValue = 1;
     private DamageManager damageManager;
 
+    public float refillDelay = 0.5f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -341,7 +343,7 @@ public class Board : MonoBehaviour
                 }
             }
         }
-        yield return new WaitForSeconds(.4f);
+        yield return new WaitForSeconds(refillDelay * 0.5f);
         StartCoroutine(FillBoardCo());
     }
 
@@ -362,7 +364,7 @@ public class Board : MonoBehaviour
             }
             nullCount = 0;
         }
-        yield return new WaitForSeconds(.4f);
+        yield return new WaitForSeconds(refillDelay * 0.5f);
         StartCoroutine(FillBoardCo());
     }
 
@@ -376,6 +378,14 @@ public class Board : MonoBehaviour
                 {
                     Vector2 tempPosition = new Vector2(i,j+offset);
                     int dotToUse = Random.Range(0, dots.Length);
+
+                    int maxIterations = 0;
+                    while (MatchesAt(i,j, dots[dotToUse]))
+                    {
+                        maxIterations++;
+                        dotToUse = Random.Range(0, dots.Length);
+                    }
+
                     GameObject piece = Instantiate(dots[dotToUse],
                       tempPosition, Quaternion.identity);
                     piece.GetComponent<Dot>().row = j;
@@ -409,17 +419,17 @@ public class Board : MonoBehaviour
     private IEnumerator FillBoardCo()
     {
         RefillBoard();
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(refillDelay);
 
         while(MatchesOnBoard())
         {
             // streakValue += 1; // not using streak for now
-            yield return new WaitForSeconds(.5f);
             DestroyMatches();
+            yield return new WaitForSeconds(2 * refillDelay);
         }
         findMatches.currentMatches.Clear();
         currentDot = null;
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(refillDelay);
 
         if (IsDeadlocked())
         {
