@@ -15,6 +15,7 @@ TagManager:
   - Tile_Attack
   - Tile_Operator
   - Tile_Loot
+  - Color
   layers:
   - Default
   - TransparentFX

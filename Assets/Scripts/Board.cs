@@ -44,6 +44,7 @@ public class Board : MonoBehaviour
     private DamageManager damageManager;
 
     public float refillDelay = 0.5f;
+    public int[] damageGoals;
 
 
     // Start is called before the first frame update
