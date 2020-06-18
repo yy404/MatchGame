@@ -42,6 +42,7 @@ public class Board : MonoBehaviour
     public int baseDamageValue = 1;
     private int streakValue = 1;
     private DamageManager damageManager;
+    private SoundManager soundManager;
 
     public float refillDelay = 0.5f;
     public int[] damageGoals;
@@ -50,6 +51,7 @@ public class Board : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        soundManager = FindObjectOfType<SoundManager>();
         damageManager = FindObjectOfType<DamageManager>();
         breakableTiles = new BackgroundTile[width, height];
         findMatches = FindObjectOfType<FindMatches>();
@@ -294,6 +296,17 @@ public class Board : MonoBehaviour
             if (allDots[column, row].tag == "Tile_Attack")
             {
                 damageManager.DealDamage(baseDamageValue * streakValue);
+                if (soundManager != null)
+                {
+                    soundManager.PlayDestroySpecial();
+                }
+            }
+            else
+            {
+                if (soundManager != null)
+                {
+                    soundManager.PlayDestroyNormal();
+                }
             }
 
             Destroy(particle, .5f);
