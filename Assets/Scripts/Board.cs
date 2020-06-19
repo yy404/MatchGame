@@ -41,18 +41,18 @@ public class Board : MonoBehaviour
     private FindMatches findMatches;
     public int baseDamageValue = 1;
     private int streakValue = 1;
-    private DamageManager damageManager;
+    private BattleManager battleManager;
     private SoundManager soundManager;
 
     public float refillDelay = 0.5f;
-    public int[] damageGoals;
+    // public int[] damageGoals;
 
 
     // Start is called before the first frame update
     void Start()
     {
         soundManager = FindObjectOfType<SoundManager>();
-        damageManager = FindObjectOfType<DamageManager>();
+        battleManager = FindObjectOfType<BattleManager>();
         breakableTiles = new BackgroundTile[width, height];
         findMatches = FindObjectOfType<FindMatches>();
         blankSpaces = new bool[width, height];
@@ -295,7 +295,7 @@ public class Board : MonoBehaviour
 
             if (allDots[column, row].tag == "Tile_Attack")
             {
-                damageManager.DealDamage(baseDamageValue * streakValue);
+                battleManager.DamageEnemy(baseDamageValue);
                 if (soundManager != null)
                 {
                     soundManager.PlayDestroySpecial();
@@ -437,8 +437,8 @@ public class Board : MonoBehaviour
 
         while(MatchesOnBoard())
         {
-            // streakValue += 1; // not using streak for now
-            DestroyMatches();
+            streakValue += 1;
+            DestroyMatches(); // this is recursion
             yield return new WaitForSeconds(2 * refillDelay);
         }
         findMatches.currentMatches.Clear();
@@ -450,6 +450,12 @@ public class Board : MonoBehaviour
             ShuffleBoard();
             Debug.Log("Deadlocked!!!");
         }
+
+        if (streakValue <= 1) // No action for the recursive procedure 
+        {
+            yield return battleManager.EnemyActionCo();
+        }
+
         currentState = GameState.move;
         streakValue = 1;
     }
