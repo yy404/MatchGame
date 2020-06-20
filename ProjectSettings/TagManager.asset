@@ -16,6 +16,7 @@ TagManager:
   - Tile_Operator
   - Tile_Loot
   - Color
+  - Breakable
   layers:
   - Default
   - TransparentFX

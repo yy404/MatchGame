@@ -43,6 +43,7 @@ public class Board : MonoBehaviour
     private int streakValue = 1;
     private BattleManager battleManager;
     private SoundManager soundManager;
+    private GoalManager goalManager;
 
     public float refillDelay = 0.5f;
     // public int[] damageGoals;
@@ -51,6 +52,7 @@ public class Board : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        goalManager = FindObjectOfType<GoalManager>();
         soundManager = FindObjectOfType<SoundManager>();
         battleManager = FindObjectOfType<BattleManager>();
         breakableTiles = new BackgroundTile[width, height];
@@ -293,6 +295,12 @@ public class Board : MonoBehaviour
             GameObject particle = Instantiate(destroyEffect,
               allDots[column,row].transform.position, Quaternion.identity);
 
+            if (goalManager != null)
+            {
+                goalManager.CompareGoal(allDots[column,row].tag.ToString());
+                goalManager.UpdateGoals();
+            }
+
             if (allDots[column, row].tag == "Tile_Attack")
             {
                 battleManager.DamageEnemy(baseDamageValue);
@@ -451,7 +459,7 @@ public class Board : MonoBehaviour
             Debug.Log("Deadlocked!!!");
         }
 
-        if (streakValue <= 1) // No action for the recursive procedure 
+        if (streakValue <= 1) // No action for the recursive procedure
         {
             yield return battleManager.EnemyActionCo();
         }

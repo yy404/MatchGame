@@ -6,10 +6,12 @@ public class BackgroundTile : MonoBehaviour
 {
     public int hitPoints;
     private SpriteRenderer sprite;
+    private GoalManager goalManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        goalManager = FindObjectOfType<GoalManager>();
         sprite = GetComponent<SpriteRenderer>();
     }
 
@@ -18,7 +20,12 @@ public class BackgroundTile : MonoBehaviour
     {
         if (hitPoints <= 0)
         {
-             Destroy(this.gameObject);
+            if (goalManager != null)
+            {
+                goalManager.CompareGoal(this.gameObject.tag);
+                goalManager.UpdateGoals();
+            }
+            Destroy(this.gameObject);
         }
     }
 
