@@ -1978,6 +1978,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87e8e2441a1da4201be03926cf4185a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  world: {fileID: 11400000, guid: 79433790113bf4e4d879e542483c31dd, type: 2}
+  level: 3
   currentState: 1
   width: 5
   height: 5
@@ -1994,15 +1996,15 @@ MonoBehaviour:
   destroyEffect: {fileID: 23151640794245560, guid: 477f0596832d74df2ae9cb6197e1d99d,
     type: 3}
   boardLayout:
-  - x: 2
-    y: 2
-    tileKind: 1
   - x: 0
     y: 0
     tileKind: 0
   - x: 4
     y: 0
     tileKind: 0
+  - x: 2
+    y: 2
+    tileKind: 1
   currentDot: {fileID: 0}
   baseDamageValue: 1
   refillDelay: 0.5
@@ -2367,8 +2369,8 @@ MonoBehaviour:
   tryAgainPanel: {fileID: 301285430}
   counter: {fileID: 475370005}
   requirements:
-    gameType: 1
-    counterValue: 2
+    gameType: 0
+    counterValue: 30
   currentCounterValue: 0
   timerSeconds: 0
 --- !u!1 &1116562361
