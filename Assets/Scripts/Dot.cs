@@ -198,6 +198,8 @@ public class Dot : MonoBehaviour
             // Debug.Log(swipeAngle);
             MovePieces();
             board.currentDot = this;
+            BattleManager battleManager = FindObjectOfType<BattleManager>();
+            battleManager.ConsumeEnergy(2);
         }
         else
         {

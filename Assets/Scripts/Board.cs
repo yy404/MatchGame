@@ -52,7 +52,7 @@ public class Board : MonoBehaviour
     public GameObject[,] allDots;
     public Dot currentDot;
     private FindMatches findMatches;
-    public int baseDamageValue = 1;
+    // public int baseDamageValue = 1;
     private int streakValue = 1;
     private BattleManager battleManager;
     private SoundManager soundManager;
@@ -333,7 +333,15 @@ public class Board : MonoBehaviour
 
             if (allDots[column, row].tag == "Tile_Attack")
             {
-                battleManager.DamageEnemy(baseDamageValue);
+                // battleManager.DamageEnemy(baseDamageValue);
+                if (soundManager != null)
+                {
+                    soundManager.PlayDestroySpecial();
+                }
+            }
+            else if (allDots[column, row].tag == "Tile_Operator")
+            {
+                battleManager.ConsumeEnergy(-1);
                 if (soundManager != null)
                 {
                     soundManager.PlayDestroySpecial();
@@ -489,10 +497,11 @@ public class Board : MonoBehaviour
             Debug.Log("Deadlocked!!!");
         }
 
-        if (streakValue <= 1) // No action for the recursive procedure
-        {
-            yield return battleManager.EnemyActionCo();
-        }
+        // if (streakValue <= 1) // No action for the recursive procedure
+        // {
+        //     // yield return battleManager.EnemyActionCo();
+        //     battleManager.ConsumeEnergy(2);
+        // }
 
         currentState = GameState.move;
         streakValue = 1;
