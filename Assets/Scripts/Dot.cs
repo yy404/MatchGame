@@ -199,7 +199,7 @@ public class Dot : MonoBehaviour
             MovePieces();
             board.currentDot = this;
             BattleManager battleManager = FindObjectOfType<BattleManager>();
-            battleManager.ConsumeEnergy(2);
+            battleManager.ConsumeEnergy(1);
         }
         else
         {

@@ -16,19 +16,15 @@ MonoBehaviour:
   height: 5
   boardLayout: []
   dots:
-  - {fileID: 3122517894798937674, guid: bdfd5429097804704981cc5f8e193f85, type: 3}
-  - {fileID: 3122517894798937674, guid: 40ac8856c00b2446b933e8776379aa8e, type: 3}
-  - {fileID: 3122517894798937674, guid: bbc490b71e0a847e8901a68a7296fd31, type: 3}
-  - {fileID: 3122517894798937674, guid: 9e5e4d92bbb1b43f4a31276153d3493e, type: 3}
+  - {fileID: 3122517894798937674, guid: 31464cb855fea46b390296bf9a6ade28, type: 3}
+  - {fileID: 3122517894798937674, guid: 08227f75ba5334256b0207efbe5708fd, type: 3}
+  - {fileID: 3122517894798937674, guid: 9478d66b3d120417da7031bd2d5bc0b8, type: 3}
+  - {fileID: 3122517894798937674, guid: 6bb51509066c644c5938acf6519a4483, type: 3}
   endGameRequirements:
-    gameType: 1
-    counterValue: 60
+    gameType: 0
+    counterValue: 30
   levelGoals:
-  - numberNeeded: 2
-    numberCollected: 3
-    goalSprite: {fileID: 21300000, guid: 0077d812240d64198a2e8d0af35e1099, type: 3}
-    matchValue: Tile_Loot
-  - numberNeeded: 2
-    numberCollected: 3
-    goalSprite: {fileID: 21300000, guid: a20c23c5b28494c8c943f688398fc455, type: 3}
-    matchValue: Tile_Operator
+  - numberNeeded: 15
+    numberCollected: 15
+    goalSprite: {fileID: 21300000, guid: ca5ad753e1d2042bfb3a4280367c173a, type: 3}
+    matchValue: Tile_Tree

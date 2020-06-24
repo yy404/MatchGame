@@ -306,10 +306,10 @@ public class Board : MonoBehaviour
         if (allDots[column, row].GetComponent<Dot>().isMatched)
         {
             // How many elements are is the matched pieces list from findmatches?
-            if (findMatches.currentMatches.Count >= 4)
-            {
-                CheckToMakeBombs();
-            }
+            // if (findMatches.currentMatches.Count >= 4)
+            // {
+            //     CheckToMakeBombs();
+            // }
 
             // Does a tile need to break?
             if (breakableTiles[column, row] != null)
@@ -331,17 +331,35 @@ public class Board : MonoBehaviour
                 goalManager.UpdateGoals();
             }
 
-            if (allDots[column, row].tag == "Tile_Attack")
+
+            // if (allDots[column, row].tag == "Tile_Attack")
+            // {
+            //     // battleManager.DamageEnemy(baseDamageValue);
+            //     if (soundManager != null)
+            //     {
+            //         soundManager.PlayDestroySpecial();
+            //     }
+            // }
+            if (allDots[column, row].tag == "Tile_Energy") //Tile_Operator
             {
-                // battleManager.DamageEnemy(baseDamageValue);
+                battleManager.ConsumeEnergy(-1);
                 if (soundManager != null)
                 {
                     soundManager.PlayDestroySpecial();
                 }
             }
-            else if (allDots[column, row].tag == "Tile_Operator")
+            else if (allDots[column, row].tag == "Tile_SpecialEvent")
             {
-                battleManager.ConsumeEnergy(-1);
+                AlchemyManager alchemyManager = FindObjectOfType<AlchemyManager>();
+                alchemyManager.ModifyTile();
+                if (soundManager != null)
+                {
+                    soundManager.PlayDestroySpecial();
+                }
+            }
+            else if (allDots[column, row].tag == "Tile_NormalEvent")
+            {
+                battleManager.Restore();
                 if (soundManager != null)
                 {
                     soundManager.PlayDestroySpecial();

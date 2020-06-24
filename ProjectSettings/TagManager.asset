@@ -17,6 +17,11 @@ TagManager:
   - Tile_Loot
   - Color
   - Breakable
+  - Tile_Tree
+  - Tile_TreeBranch
+  - Tile_Energy
+  - Tile_NormalEvent
+  - Tile_SpecialEvent
   layers:
   - Default
   - TransparentFX

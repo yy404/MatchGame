@@ -73,11 +73,20 @@ public class BattleManager : MonoBehaviour
         if (currEnergyPlayer < 0)
         {
             currEnergyPlayer = 0;
-            DamagePlayer(2);
+            DamagePlayer(1);
         }
         if (board != null && energyBarPlayer != null)
         {
             energyBarPlayer.fillAmount = (float) currEnergyPlayer / (float) totalEnergyPlayer;
+        }
+    }
+
+    public void Restore()
+    {
+        if (currEnergyPlayer >= 2 && currHealthPlayer < totalHealthPlayer)
+        {
+            ConsumeEnergy(2);
+            DamagePlayer(-1);
         }
     }
 
