@@ -22,6 +22,7 @@ TagManager:
   - Tile_Energy
   - Tile_NormalEvent
   - Tile_SpecialEvent
+  - Tile_Light
   layers:
   - Default
   - TransparentFX

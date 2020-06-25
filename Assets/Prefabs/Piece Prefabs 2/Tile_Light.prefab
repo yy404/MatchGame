@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 61833214841996732}
   - component: {fileID: 114668017023539678}
   m_Layer: 0
-  m_Name: Tile_SpecialEvent
-  m_TagString: Tile_SpecialEvent
+  m_Name: Tile_Light
+  m_TagString: Tile_Light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,8 +70,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a0870073b1ac24651bfe6ff8cb78a74e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
+  m_Sprite: {fileID: 21300000, guid: 23149bb84809c4dda8b193d9519d8463, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

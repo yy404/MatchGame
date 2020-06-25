@@ -348,18 +348,35 @@ public class Board : MonoBehaviour
                     soundManager.PlayDestroySpecial();
                 }
             }
-            else if (allDots[column, row].tag == "Tile_SpecialEvent")
+            else if (allDots[column, row].tag == "Tile_NormalEvent") // Tile_SpecialEvent
             {
                 AlchemyManager alchemyManager = FindObjectOfType<AlchemyManager>();
-                alchemyManager.ModifyTile();
+                alchemyManager.ModifyTile("Tile_Tree");
                 if (soundManager != null)
                 {
                     soundManager.PlayDestroySpecial();
                 }
             }
-            else if (allDots[column, row].tag == "Tile_NormalEvent")
+            else if (allDots[column, row].tag == "Tile_Tree")
             {
-                battleManager.Restore();
+                AlchemyManager alchemyManager = FindObjectOfType<AlchemyManager>();
+                alchemyManager.ModifyTile("Tile_SpecialEvent");
+                if (soundManager != null)
+                {
+                    soundManager.PlayDestroySpecial();
+                }
+            }
+            // else if (allDots[column, row].tag == "Tile_NormalEvent")
+            // {
+            //     battleManager.Restore();
+            //     if (soundManager != null)
+            //     {
+            //         soundManager.PlayDestroySpecial();
+            //     }
+            // }
+            else if (allDots[column, row].tag == "Tile_Light")
+            {
+                battleManager.ConsumeEnergy(1);
                 if (soundManager != null)
                 {
                     soundManager.PlayDestroySpecial();
@@ -391,6 +408,10 @@ public class Board : MonoBehaviour
                 }
             }
         }
+
+        AlchemyManager alchemyManager = FindObjectOfType<AlchemyManager>();
+        alchemyManager.ResetEventPoints();
+
         findMatches.currentMatches.Clear();
         StartCoroutine(DecreaseRowCo2());
     }
@@ -462,6 +483,10 @@ public class Board : MonoBehaviour
                     {
                         maxIterations++;
                         dotToUse = Random.Range(0, dots.Length);
+                        if (maxIterations > 100)
+                        {
+                            break;
+                        }
                     }
 
                     GameObject piece = Instantiate(dots[dotToUse],

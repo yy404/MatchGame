@@ -10,22 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35aade9481e444ac499e6e2700c3f571, type: 3}
-  m_Name: Level 1
+  m_Name: Level 0
   m_EditorClassIdentifier: 
   width: 3
   height: 3
   boardLayout: []
   dots:
   - {fileID: 3122517894798937674, guid: 31464cb855fea46b390296bf9a6ade28, type: 3}
-  - {fileID: 3122517894798937674, guid: 6bb51509066c644c5938acf6519a4483, type: 3}
   - {fileID: 3122517894798937674, guid: d8aa25721933847b1a28e075e39e53dc, type: 3}
   endGameRequirements:
     gameType: 0
-    counterValue: 15
+    counterValue: 10
   levelGoals:
   - numberNeeded: 9
     numberCollected: 0
     goalSprite: {fileID: 21300000, guid: 649a0565af6794670b80fac0599845d0, type: 3}
     matchValue: Tile_TreeBranch
   maxHealth: 2
-  maxEnergy: 2
+  maxEnergy: 1

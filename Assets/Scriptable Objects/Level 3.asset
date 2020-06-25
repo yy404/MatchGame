@@ -12,18 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35aade9481e444ac499e6e2700c3f571, type: 3}
   m_Name: Level 3
   m_EditorClassIdentifier: 
-  width: 5
-  height: 5
+  width: 4
+  height: 4
   boardLayout: []
   dots:
-  - {fileID: 3122517894798937674, guid: bdfd5429097804704981cc5f8e193f85, type: 3}
-  - {fileID: 3122517894798937674, guid: 40ac8856c00b2446b933e8776379aa8e, type: 3}
-  - {fileID: 3122517894798937674, guid: bbc490b71e0a847e8901a68a7296fd31, type: 3}
+  - {fileID: 3122517894798937674, guid: 31464cb855fea46b390296bf9a6ade28, type: 3}
+  - {fileID: 3122517894798937674, guid: 6bb51509066c644c5938acf6519a4483, type: 3}
+  - {fileID: 3122517894798937674, guid: 08227f75ba5334256b0207efbe5708fd, type: 3}
   endGameRequirements:
     gameType: 0
     counterValue: 20
   levelGoals:
-  - numberNeeded: 7
+  - numberNeeded: 3
     numberCollected: 0
-    goalSprite: {fileID: 21300000, guid: e7d2efa7425f143c9917339340b941f7, type: 3}
-    matchValue: Tile_Attack
+    goalSprite: {fileID: 21300000, guid: 649a0565af6794670b80fac0599845d0, type: 3}
+    matchValue: Tile_TreeBranch
+  maxHealth: 2
+  maxEnergy: 3

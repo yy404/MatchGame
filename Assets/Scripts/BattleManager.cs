@@ -32,6 +32,8 @@ public class BattleManager : MonoBehaviour
         board = FindObjectOfType<Board>();
         endGameManager = FindObjectOfType<EndGameManager>();
 
+        SetInfo();
+
         // currHealthEnemy = totalHealthEnemy;
         currHealthPlayer = totalHealthPlayer;
         currEnergyPlayer = totalEnergyPlayer;
@@ -43,6 +45,21 @@ public class BattleManager : MonoBehaviour
         // healthTextEnemy.text = "Enemy health: " + currHealthEnemy; // .ToString()
         healthTextPlayer.text = "Health: " + currHealthPlayer;
         energyTextPlayer.text = "Energy: " + currEnergyPlayer;
+    }
+
+    void SetInfo()
+    {
+        if (board != null && board.world != null)
+        {
+            if (board.level < board.world.levels.Length)
+            {
+                if (board.world.levels[board.level] != null)
+                {
+                    totalHealthPlayer = board.world.levels[board.level].maxHealth;
+                    totalEnergyPlayer = board.world.levels[board.level].maxEnergy;
+                }
+            }
+        }
     }
 
     public void DamagePlayer(int damageAmount)

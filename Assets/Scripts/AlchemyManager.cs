@@ -40,10 +40,10 @@ public class AlchemyManager : MonoBehaviour
         return tilesFound;
     }
 
-    GameObject PickOneRandomly()
+    GameObject PickOneRandomly(string thisTag)
     {
         List<GameObject> tilesFound = new List<GameObject>();
-        tilesFound = FindTilesByTag("Tile_Tree");
+        tilesFound = FindTilesByTag(thisTag);
         if (tilesFound.Count > 0)
         {
             int pieceToUse = Random.Range(0,tilesFound.Count);
@@ -52,18 +52,24 @@ public class AlchemyManager : MonoBehaviour
         return null;
     }
 
-    public void ModifyTile()
+    public void ModifyTile(string thisTag)
     {
         eventPoints++;
         if (eventPoints >= 3)
         {
-            GameObject thisTile = PickOneRandomly();
+            GameObject thisTile = PickOneRandomly(thisTag);
             if (thisTile != null)
             {
-                thisTile.GetComponent<SpriteRenderer>().sprite = newSprite;
+                SpriteRenderer rend = thisTile.GetComponent<SpriteRenderer>();
+                rend.sprite = newSprite;
+                rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 1.0f);
                 thisTile.tag = "Tile_TreeBranch";
             }
-            eventPoints = 0;
         }
+    }
+
+    public void ResetEventPoints()
+    {
+        eventPoints = 0;
     }
 }

@@ -21,4 +21,8 @@ public class Level : ScriptableObject
     [Header("End Game Requirements")]
     public EndGameRequirements endGameRequirements;
     public BlankGoal[] levelGoals;
+
+    [Header("Player")]
+    public int maxHealth;
+    public int maxEnergy;
 }
