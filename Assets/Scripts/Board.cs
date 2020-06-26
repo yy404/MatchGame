@@ -61,6 +61,9 @@ public class Board : MonoBehaviour
     public float refillDelay = 0.5f;
     // public int[] damageGoals;
 
+    public int countUncertainty = 0;
+    public int countLight = 0;
+
     private void Awake()
     {
         if (PlayerPrefs.HasKey("Current Level"))
@@ -157,6 +160,8 @@ public class Board : MonoBehaviour
                     dot.transform.parent = this.transform;
                     dot.name = "( " + i + ", " + j + " )";
                     allDots[i,j] = dot;
+
+                    UpdateTileCounter(dot.tag, 1);
                 }
             }
         }
@@ -331,9 +336,14 @@ public class Board : MonoBehaviour
 
             if (goalManager != null)
             {
-                goalManager.CompareGoal(allDots[column,row].tag.ToString());
-                goalManager.UpdateGoals();
+                if (battleManager.GetCurrentHealth() > 0)
+                {
+                    goalManager.CompareGoal(allDots[column,row].tag.ToString());
+                    goalManager.UpdateGoals();
+                }
             }
+
+            UpdateTileCounter(allDots[column, row].tag, -1);
 
 
             // if (allDots[column, row].tag == "Tile_Attack")
@@ -355,7 +365,7 @@ public class Board : MonoBehaviour
             else if (allDots[column, row].tag == "Tile_NormalEvent") // Tile_SpecialEvent
             {
                 AlchemyManager alchemyManager = FindObjectOfType<AlchemyManager>();
-                alchemyManager.ModifyTile("Tile_Tree");
+                alchemyManager.ModifyTile("Tile_Tree", "Tile_TreeBranch");
                 if (soundManager != null)
                 {
                     soundManager.PlayDestroySpecial();
@@ -364,7 +374,10 @@ public class Board : MonoBehaviour
             else if (allDots[column, row].tag == "Tile_Tree")
             {
                 AlchemyManager alchemyManager = FindObjectOfType<AlchemyManager>();
-                alchemyManager.ModifyTile("Tile_SpecialEvent");
+                alchemyManager.ModifyTile("Tile_Light", "Tile_SpecialEvent");
+                countUncertainty++;
+                countLight--;
+
                 if (soundManager != null)
                 {
                     soundManager.PlayDestroySpecial();
@@ -380,7 +393,7 @@ public class Board : MonoBehaviour
             // }
             else if (allDots[column, row].tag == "Tile_Light")
             {
-                battleManager.ConsumeEnergy(1);
+                battleManager.ConsumeEnergy(-1);
                 if (soundManager != null)
                 {
                     soundManager.PlayDestroySpecial();
@@ -500,6 +513,9 @@ public class Board : MonoBehaviour
                     piece.transform.parent = this.transform;
                     piece.name = "( " + i + ", " + j + " )";
                     allDots[i,j] = piece;
+
+                    UpdateTileCounter(piece.tag, 1);
+
                 }
             }
         }
@@ -544,11 +560,12 @@ public class Board : MonoBehaviour
             Debug.Log("Deadlocked!!!");
         }
 
-        // if (streakValue <= 1) // No action for the recursive procedure
-        // {
-        //     // yield return battleManager.EnemyActionCo();
-        //     battleManager.ConsumeEnergy(2);
-        // }
+        if (streakValue <= 1) // No action for the recursive procedure
+        {
+            // yield return battleManager.EnemyActionCo();
+            AlchemyManager alchemyManager = FindObjectOfType<AlchemyManager>();
+            alchemyManager.TriggerSpecialEvent();
+        }
 
         currentState = GameState.move;
         streakValue = 1;
@@ -691,6 +708,19 @@ public class Board : MonoBehaviour
         if (IsDeadlocked())
         {
             ShuffleBoard();
+        }
+    }
+
+    private void UpdateTileCounter(string thisTag, int delta)
+    {
+        switch (thisTag)
+        {
+            case "Tile_SpecialEvent":
+                countUncertainty += delta;
+                break;
+            case "Tile_Light":
+                countLight += delta;
+                break;
         }
     }
 }

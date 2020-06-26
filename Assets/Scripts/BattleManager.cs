@@ -106,6 +106,10 @@ public class BattleManager : MonoBehaviour
             DamagePlayer(-1);
         }
     }
+    public int GetCurrentHealth()
+    {
+        return currHealthPlayer;
+    }
 
     // public void DamageEnemy(int damageAmount)
     // {

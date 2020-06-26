@@ -1884,7 +1884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23be62d167c2742238a6c0fd5432cd93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 0
+  isActive: 1
   activeSprite: {fileID: 21300000, guid: 458128685eaa64adcb5d5a65a9e74eda, type: 3}
   lockedSprite: {fileID: 21300000, guid: bcb5bd3d5200d4f3fa52ab5d2511d088, type: 3}
   stars:
@@ -4011,7 +4011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23be62d167c2742238a6c0fd5432cd93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 0
+  isActive: 1
   activeSprite: {fileID: 21300000, guid: 458128685eaa64adcb5d5a65a9e74eda, type: 3}
   lockedSprite: {fileID: 21300000, guid: bcb5bd3d5200d4f3fa52ab5d2511d088, type: 3}
   stars:
@@ -4850,7 +4850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23be62d167c2742238a6c0fd5432cd93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 0
+  isActive: 1
   activeSprite: {fileID: 21300000, guid: 458128685eaa64adcb5d5a65a9e74eda, type: 3}
   lockedSprite: {fileID: 21300000, guid: bcb5bd3d5200d4f3fa52ab5d2511d088, type: 3}
   stars:
@@ -5332,7 +5332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23be62d167c2742238a6c0fd5432cd93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 0
+  isActive: 1
   activeSprite: {fileID: 21300000, guid: 458128685eaa64adcb5d5a65a9e74eda, type: 3}
   lockedSprite: {fileID: 21300000, guid: bcb5bd3d5200d4f3fa52ab5d2511d088, type: 3}
   stars:

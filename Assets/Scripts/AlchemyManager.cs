@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class AlchemyManager : MonoBehaviour
 {
-    public Sprite newSprite;
+    public Sprite spriteTreeBranch;
+    public Sprite spriteSpecialEvent;
     private Board board;
     private int eventPoints;
 
@@ -52,18 +53,28 @@ public class AlchemyManager : MonoBehaviour
         return null;
     }
 
-    public void ModifyTile(string thisTag)
+    public void ModifyTile(string thisTag, string thatTag)
     {
-        eventPoints++;
-        if (eventPoints >= 3)
+        // eventPoints++;
+        if (true) //(eventPoints >= 3)
         {
             GameObject thisTile = PickOneRandomly(thisTag);
             if (thisTile != null)
             {
                 SpriteRenderer rend = thisTile.GetComponent<SpriteRenderer>();
-                rend.sprite = newSprite;
-                rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 1.0f);
-                thisTile.tag = "Tile_TreeBranch";
+
+                if (thatTag == "Tile_TreeBranch")
+                {
+                    rend.sprite = spriteTreeBranch;
+                    // rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 0.5f);
+                    thisTile.tag = "Tile_TreeBranch";
+                }
+                if (thatTag == "Tile_SpecialEvent")
+                {
+                    rend.sprite = spriteSpecialEvent;
+                    rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 0.2f);
+                    thisTile.tag = "Tile_SpecialEvent";
+                }
             }
         }
     }
@@ -71,5 +82,14 @@ public class AlchemyManager : MonoBehaviour
     public void ResetEventPoints()
     {
         eventPoints = 0;
+    }
+
+    public void TriggerSpecialEvent()
+    {
+        if (board.countUncertainty >= 6)
+        {
+            ModifyTile("Tile_SpecialEvent", "Tile_TreeBranch");
+            board.countUncertainty--;
+        }
     }
 }

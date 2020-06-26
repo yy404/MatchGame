@@ -75,7 +75,15 @@ public class EndGameManager : MonoBehaviour
             counter.text = "" + currentCounterValue;
             if (currentCounterValue <= 0)
             {
-                LoseGame();
+                BattleManager battleManager = FindObjectOfType<BattleManager>();
+                if (battleManager.GetCurrentHealth() > 0)
+                {
+                    WinGame();
+                }
+                else
+                {
+                    //LoseGame(); achieved in DamagePlayer()
+                }
             }
         }
 
