@@ -67,33 +67,41 @@ public class EndGameManager : MonoBehaviour
         counter.text = "" + currentCounterValue;
     }
 
-    public void DecreaseCounterValue()
+    // public void DecreaseCounterValue()
+    // {
+    //     if (board.currentState != GameState.pause)
+    //     {
+    //         currentCounterValue--;
+    //         counter.text = "" + currentCounterValue;
+    //         if (currentCounterValue <= 0)
+    //         {
+    //             BattleManager battleManager = FindObjectOfType<BattleManager>();
+    //             if (battleManager.GetCurrentHealth() > 0)
+    //             {
+    //                 WinGame();
+    //             }
+    //             else
+    //             {
+    //                 //LoseGame(); achieved in DamagePlayer()
+    //             }
+    //         }
+    //     }
+    // }
+
+    public void IncreaseCounterValue()
     {
         if (board.currentState != GameState.pause)
         {
-            currentCounterValue--;
+            currentCounterValue++;
             counter.text = "" + currentCounterValue;
-            if (currentCounterValue <= 0)
-            {
-                BattleManager battleManager = FindObjectOfType<BattleManager>();
-                if (battleManager.GetCurrentHealth() > 0)
-                {
-                    WinGame();
-                }
-                else
-                {
-                    //LoseGame(); achieved in DamagePlayer()
-                }
-            }
         }
-
     }
 
     public void WinGame()
     {
         youWinPanel.SetActive(true);
         board.currentState = GameState.win;
-        currentCounterValue = 0;
+        // currentCounterValue = 0;
         counter.text = "" + currentCounterValue;
         FadePanelController fade = FindObjectOfType<FadePanelController>();
         fade.GameOver();
@@ -104,7 +112,7 @@ public class EndGameManager : MonoBehaviour
         tryAgainPanel.SetActive(true);
         board.currentState = GameState.lose;
         // Debug.Log("Try again!");
-        currentCounterValue = 0;
+        // currentCounterValue = 0;
         counter.text = "" + currentCounterValue;
         FadePanelController fade = FindObjectOfType<FadePanelController>();
         fade.GameOver();
@@ -118,7 +126,8 @@ public class EndGameManager : MonoBehaviour
             timerSeconds -= Time.deltaTime;
             if (timerSeconds <= 0)
             {
-                DecreaseCounterValue();
+                // DecreaseCounterValue();
+                IncreaseCounterValue();
                 timerSeconds = 1;
             }
         }

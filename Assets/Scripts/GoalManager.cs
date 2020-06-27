@@ -80,22 +80,22 @@ public class GoalManager : MonoBehaviour
             currentGoals[i].thisText.text = ""
                 + levelGoals[i].numberCollected + "/"
                 + levelGoals[i].numberNeeded;
-            // if (levelGoals[i].numberCollected >= levelGoals[i].numberNeeded)
-            // {
-            //     goalsCompleted++;
-            //     currentGoals[i].thisText.text = ""
-            //         + levelGoals[i].numberNeeded + "/"
-            //         + levelGoals[i].numberNeeded;
-            // }
+            if (levelGoals[i].numberCollected >= levelGoals[i].numberNeeded)
+            {
+                goalsCompleted++;
+                currentGoals[i].thisText.text = ""
+                    + levelGoals[i].numberNeeded + "/"
+                    + levelGoals[i].numberNeeded;
+            }
         }
-        // if (goalsCompleted >= levelGoals.Length)
-        // {
-        //     if (endGame != null)
-        //     {
-        //         endGame.WinGame();
-        //     }
-        //     Debug.Log("You win!");
-        // }
+        if (goalsCompleted >= levelGoals.Length)
+        {
+            if (endGame != null)
+            {
+                endGame.WinGame();
+            }
+            Debug.Log("You win!");
+        }
     }
 
     public void CompareGoal(string goalToCompare)

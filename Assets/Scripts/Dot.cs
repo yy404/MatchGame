@@ -153,7 +153,8 @@ public class Dot : MonoBehaviour
                 {
                     if (endGameManager.requirements.gameType == GameType.Moves)
                     {
-                        endGameManager.DecreaseCounterValue();
+                        // endGameManager.DecreaseCounterValue();
+                        endGameManager.IncreaseCounterValue();
                     }
                 }
                 board.DestroyMatches();

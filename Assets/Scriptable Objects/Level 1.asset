@@ -21,11 +21,11 @@ MonoBehaviour:
   - {fileID: 3122517894798937674, guid: d8aa25721933847b1a28e075e39e53dc, type: 3}
   endGameRequirements:
     gameType: 0
-    counterValue: 8
+    counterValue: 0
   levelGoals:
   - numberNeeded: 9
-    numberCollected: 15
+    numberCollected: 9
     goalSprite: {fileID: 21300000, guid: 649a0565af6794670b80fac0599845d0, type: 3}
     matchValue: Tile_TreeBranch
   maxHealth: 3
-  maxEnergy: 3
+  maxEnergy: 2

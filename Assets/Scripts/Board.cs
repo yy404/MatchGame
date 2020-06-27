@@ -365,7 +365,17 @@ public class Board : MonoBehaviour
             else if (allDots[column, row].tag == "Tile_NormalEvent") // Tile_SpecialEvent
             {
                 AlchemyManager alchemyManager = FindObjectOfType<AlchemyManager>();
-                alchemyManager.ModifyTile("Tile_Tree", "Tile_TreeBranch");
+
+                List<GameObject> tilesFound = new List<GameObject>();
+                tilesFound = alchemyManager.FindTilesByTag("Tile_Tree");
+                if (tilesFound.Count > 0)
+                {
+                    if (alchemyManager.ModifyTile("Tile_SpecialEvent", "Tile_TreeBranch"))
+                    {
+                        countUncertainty--;
+                    }
+                }
+
                 if (soundManager != null)
                 {
                     soundManager.PlayDestroySpecial();
@@ -374,9 +384,11 @@ public class Board : MonoBehaviour
             else if (allDots[column, row].tag == "Tile_Tree")
             {
                 AlchemyManager alchemyManager = FindObjectOfType<AlchemyManager>();
-                alchemyManager.ModifyTile("Tile_Light", "Tile_SpecialEvent");
-                countUncertainty++;
-                countLight--;
+                if (alchemyManager.ModifyTile("Tile_Light", "Tile_SpecialEvent"))
+                {
+                    countUncertainty++;
+                    countLight--;
+                }
 
                 if (soundManager != null)
                 {

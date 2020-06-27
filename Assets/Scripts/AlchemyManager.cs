@@ -21,7 +21,7 @@ public class AlchemyManager : MonoBehaviour
     // {
     // }
 
-    List<GameObject> FindTilesByTag(string thisTag)
+    public List<GameObject> FindTilesByTag(string thisTag)
     {
         List<GameObject> tilesFound = new List<GameObject>();
         for (int i = 0; i < board.width; i++)
@@ -53,8 +53,9 @@ public class AlchemyManager : MonoBehaviour
         return null;
     }
 
-    public void ModifyTile(string thisTag, string thatTag)
+    public bool ModifyTile(string thisTag, string thatTag)
     {
+        bool isModified = false;
         // eventPoints++;
         if (true) //(eventPoints >= 3)
         {
@@ -68,15 +69,18 @@ public class AlchemyManager : MonoBehaviour
                     rend.sprite = spriteTreeBranch;
                     // rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 0.5f);
                     thisTile.tag = "Tile_TreeBranch";
+                    isModified = true;
                 }
                 if (thatTag == "Tile_SpecialEvent")
                 {
                     rend.sprite = spriteSpecialEvent;
                     rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 0.2f);
                     thisTile.tag = "Tile_SpecialEvent";
+                    isModified = true;
                 }
             }
         }
+        return isModified;
     }
 
     public void ResetEventPoints()
@@ -88,8 +92,10 @@ public class AlchemyManager : MonoBehaviour
     {
         if (board.countUncertainty >= 6)
         {
-            ModifyTile("Tile_SpecialEvent", "Tile_TreeBranch");
-            board.countUncertainty--;
+            if (ModifyTile("Tile_SpecialEvent", "Tile_TreeBranch"))
+            {
+                board.countUncertainty--;
+            }
         }
     }
 }
