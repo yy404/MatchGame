@@ -27,11 +27,14 @@ public class EndGameManager : MonoBehaviour
     public int currentCounterValue;
     private Board board;
     public float timerSeconds;
+    private GameData gameData;
 
     // Start is called before the first frame update
     void Start()
     {
         board = FindObjectOfType<Board>();
+        gameData = FindObjectOfType<GameData>();
+
         SetGameType();
         SetupGame();
     }
@@ -105,6 +108,16 @@ public class EndGameManager : MonoBehaviour
         counter.text = "" + currentCounterValue;
         FadePanelController fade = FindObjectOfType<FadePanelController>();
         fade.GameOver();
+
+        if (gameData != null)
+        {
+            int bestBefore = gameData.saveData.highScores[board.level];
+            if (currentCounterValue < bestBefore)
+            {
+                gameData.saveData.highScores[board.level] = currentCounterValue;
+            }
+            gameData.Save();
+        }
     }
 
     public void LoseGame()

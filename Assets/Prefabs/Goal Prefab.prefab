@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 7339494336939643580}
   - component: {fileID: 804537086091212932}
   - component: {fileID: 114126461509908706}
+  - component: {fileID: 114217094890553628}
   m_Layer: 5
   m_Name: Goal Prefab
   m_TagString: Untagged
@@ -256,3 +257,23 @@ MonoBehaviour:
   thisSprite: {fileID: 0}
   thisText: {fileID: 6162384202711920150}
   thisString: 
+--- !u!114 &114217094890553628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8626914883632230537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 75
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1

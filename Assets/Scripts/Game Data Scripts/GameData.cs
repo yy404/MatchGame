@@ -29,12 +29,12 @@ public class GameData : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        Load();
     }
 
     // Start is called before the first frame update
     private void Start()
     {
-        Load();
     }
 
     public void Save()
