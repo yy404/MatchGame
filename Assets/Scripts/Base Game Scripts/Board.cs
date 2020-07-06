@@ -217,40 +217,69 @@ public class Board : MonoBehaviour
         return false;
     }
 
-    private bool ColumnOrRow()
+    private int ColumnOrRow()
     {
-        int numberHorizontal = 0;
-        int numberVertical = 0;
-        Dot firstPiece = findMatches.currentMatches[0].GetComponent<Dot>();
-        if (firstPiece != null)
+        // Make a copy of the current matches
+        List<GameObject> matchCopy = findMatches.currentMatches as List<GameObject>;
+
+        // Cycle through all of match copy and decide if a bomb needs to be created
+        for (int i = 0; i < matchCopy.Count; i++)
         {
-            foreach (GameObject currentPiece in findMatches.currentMatches)
+            // Store this dot
+            Dot thisDot = matchCopy[i].GetComponent<Dot>();
+            int column = thisDot.column;
+            int row = thisDot.row;
+            int columnMatch = 0;
+            int rowMatch = 0;
+
+            // Cycle through the rest of the pieces and compare
+            for (int j = 0; j < matchCopy.Count; j++)
             {
-                Dot dot = currentPiece.GetComponent<Dot>();
-                if (dot.row == firstPiece.row)
+                // Store the next dot
+                Dot nextDot = matchCopy[j].GetComponent<Dot>();
+                if (nextDot == thisDot)
                 {
-                    numberHorizontal++;
+                    continue;
                 }
-                if (dot.column == firstPiece.column)
+                if (nextDot.column == thisDot.column && nextDot.CompareTag(thisDot.tag))
                 {
-                    numberVertical++;
+                    columnMatch++;
+                }
+                if (nextDot.row == thisDot.row && nextDot.CompareTag(thisDot.tag))
+                {
+                    rowMatch++;
                 }
             }
+
+            // Return 3 if column or row match
+            // Return 2 if adjacent
+            // Return 1 if it's a color bomb
+            if ( columnMatch == 4 || rowMatch == 4)
+            {
+                return 1;
+            }
+            if ( columnMatch == 2 && rowMatch == 2)
+            {
+                return 2;
+            }
+            if (columnMatch == 3 || rowMatch == 3)
+            {
+                return 3;
+            }
+
         }
-        return (numberVertical == 5 || numberHorizontal == 5);
+
+        return 0;
     }
 
     private void CheckToMakeBombs()
     {
-        if (findMatches.currentMatches.Count == 4
-          || findMatches.currentMatches.Count == 7)
+        // How many objects are in findMatches currentMatches?
+        if (findMatches.currentMatches.Count > 3)
         {
-            findMatches.CheckBombs();
-        }
-        if (findMatches.currentMatches.Count == 5
-          || findMatches.currentMatches.Count == 8)
-        {
-            if (ColumnOrRow())
+            // What type of match?
+            int typeOfMatch = ColumnOrRow();
+            if (typeOfMatch == 1)
             {
                 // Make a color bomb
                 // Debug.Log("Making a color bomb");
@@ -279,7 +308,7 @@ public class Board : MonoBehaviour
                     }
                 }
             }
-            else
+            else if (typeOfMatch == 2)
             {
                 // Make an adjacent bomb
                 // Debug.Log("Making an adjacent bomb");
@@ -306,6 +335,10 @@ public class Board : MonoBehaviour
                         }
                     }
                 }
+            }
+            else if (typeOfMatch == 3)
+            {
+                findMatches.CheckBombs();
             }
         }
     }
@@ -553,8 +586,8 @@ public class Board : MonoBehaviour
 
     private IEnumerator FillBoardCo()
     {
-        RefillBoard();
         yield return new WaitForSeconds(refillDelay);
+        RefillBoard();
 
         while(MatchesOnBoard())
         {

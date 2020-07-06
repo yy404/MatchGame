@@ -23,6 +23,7 @@ TagManager:
   - Tile_NormalEvent
   - Tile_SpecialEvent
   - Tile_Light
+  - Board
   layers:
   - Default
   - TransparentFX
